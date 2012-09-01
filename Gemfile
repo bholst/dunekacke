@@ -27,6 +27,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'annotate', '~> 2.5.0', group: :development
+
 group :test do
   gem 'capybara', '~> 1.1.2'
   gem 'rb-inotify', '~> 0.8.8'
