@@ -1,57 +1,36 @@
 require 'spec_helper'
 
 describe "StaticPages" do
+  subject { page }
+  
   describe "Home page" do
-    it "should have the content 'Dunekacke'" do
-      visit root_path
-      page.should have_content('Dunekacke')
-    end
+    before { visit root_path }
     
-    it "should have the right title" do
-      visit root_path
-      page.should have_selector('title', :text => "Dunekacke")
-    end
-    
-    it "should not have a custom page title" do
-      visit root_path
-      page.should_not have_selector('title', :text => "|")
+    it { should have_content('Dunekacke') }
+    it { should have_selector('title', :text => "Dunekacke") }
+    it { should_not have_selector('title', :text => "|") }
     end
   end
   
   describe "Help page" do
-    it "should have the content 'Help'" do
-      visit help_path
-      page.should have_content('Help')
-    end
+    before { visit help_path }
     
-    it "should have the right title" do
-      visit help_path
-      page.should have_selector('title', :text => "Dunekacke | Help")
-    end
+    it { should have_content('Help') }
+    it { should have_selector('title', :text => "Dunekacke | Help") }
   end
   
   describe "About page" do
-    it "should have the content 'About Dunekacke'" do
-      visit about_path
-      page.should have_content('About Dunekacke')
-    end
+    before { visit about_path }
     
-    it "should have the right title" do
-      visit about_path
-      page.should have_selector('title', :text => "Dunekacke | About")
-    end
+    it { should have_content('About Dunekacke') }
+    it { should have_selector('title', :text => "Dunekacke | About") }
   end
   
   describe "Contact page" do
+    before { visit contact_path }
 
-    it "should have the h1 'Contact'" do
-      visit contact_path
-      page.should have_selector('h1', :text => 'Contact')
-    end
-
-    it "should have the title 'Contact'" do
-      visit contact_path
-      page.should have_selector('title', :text => "Dunekacke | Contact")
+    it { should have_selector('h1', :text => 'Contact') }
+    it { should have_selector('title', :text => "Dunekacke | Contact") }
     end
   end
 end
