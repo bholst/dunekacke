@@ -9,7 +9,6 @@ describe "StaticPages" do
     it { should have_content('Dunekacke') }
     it { should have_selector('title', :text => "Dunekacke") }
     it { should_not have_selector('title', :text => "|") }
-    end
   end
   
   describe "Help page" do
@@ -31,6 +30,5 @@ describe "StaticPages" do
 
     it { should have_selector('h1', :text => 'Contact') }
     it { should have_selector('title', :text => "Dunekacke | Contact") }
-    end
   end
 end
