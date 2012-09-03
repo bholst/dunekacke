@@ -25,6 +25,7 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
+  it { should respond_to(:activated) }
   it { should respond_to(:authenticate) }
   
   it { should be_valid }
@@ -135,5 +136,14 @@ describe User do
     end
     
     it { should be_admin }
+  end
+  
+  describe "with activated attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:activated)
+    end
+    
+    it { should be_activated }
   end
 end

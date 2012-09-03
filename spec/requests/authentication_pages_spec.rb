@@ -42,6 +42,25 @@ describe "Authentication" do
         it { should have_link('Sign in') }
       end
     end
+    
+    describe "as an unactivated user" do
+      let(:user) { FactoryGirl.create(:unactivated) }
+      before do 
+        fill_in "Email",    with: user.email
+        fill_in "Password", with: user.password
+        click_button "Sign in"
+      end
+      
+      it { should have_selector('title', text: 'Sign in' ) }
+      it { should have_selector('div.alert.alert-error',
+                                text: 'not activated') }
+      
+      describe "after visiting another page" do
+        before { click_link "Home" }
+        it { should_not have_selector('div.alert.alert-error',
+                                      text: 'not activated') }
+      end
+    end
   end
   
   describe "authorization" do
