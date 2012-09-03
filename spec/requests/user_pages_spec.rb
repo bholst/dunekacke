@@ -65,7 +65,10 @@ describe "User Pages" do
     end
     
     describe "with invalid information" do
-      before { click_button "Save changes" }
+      before do
+        fill_in "Password", with: "123"
+        click_button "Save changes"
+      end
       it { should have_content('error') }
     end
     
@@ -75,16 +78,33 @@ describe "User Pages" do
       before do 
         fill_in "Name", with: new_name
         fill_in "Email", with: new_email
-        fill_in "Password", with: user.password
-        fill_in "Confirmation", with: user.password
-        click_button "Save changes"
       end
       
-      it { should have_selector('title', text: new_name) }
-      it { should have_selector('div.alert.alert-success') }
-      it { should have_link('Sign out', href: signout_path) }
-      specify { user.reload.name.should == new_name }
-      specify { user.reload.email.should == new_email }
+      describe "without password" do
+        before do
+          click_button "Save changes"
+        end
+        
+        it { should have_selector('title', text: new_name) }
+        it { should have_selector('div.alert.alert-success') }
+        it { should have_link('Sign out', href: signout_path) }
+        specify { user.reload.name.should == new_name }
+        specify { user.reload.email.should == new_email }
+      end
+      
+      describe "with password" do
+        before do
+          fill_in "Password", with: user.password
+          fill_in "Confirmation", with: user.password
+          click_button "Save changes"
+        end
+        
+        it { should have_selector('title', text: new_name) }
+        it { should have_selector('div.alert.alert-success') }
+        it { should have_link('Sign out', href: signout_path) }
+        specify { user.reload.name.should == new_name }
+        specify { user.reload.email.should == new_email }
+      end
     end
   end
   
