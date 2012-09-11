@@ -130,9 +130,26 @@ describe "Authentication" do
     end
     
     describe "as an admin user" do
+      let(:user) { FactoryGirl.create(:user) }
       let(:admin) { FactoryGirl.create(:admin) }
       
       before { sign_in admin }
+      
+      describe "visiting Users#edit page" do
+        before { visit edit_user_path(user) }
+        it { should have_selector('title', text: 'Edit user') }
+      end
+        
+      describe "submitting to the update action" do
+        before do
+          visit edit_user_path(user)
+          fill_in "Name", with: "Ron"
+          click_button "Save changes"
+        end
+        it { should have_selector('title', text: 'All users') }
+        it { should have_link('edit', href: edit_user_path(user)) }
+        it { should have_content('Ron') }
+      end
       
       describe "submitting a DELETE request to his own Users#destroy action" do
         before { delete user_path(admin) }

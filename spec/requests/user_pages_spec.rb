@@ -64,6 +64,31 @@ describe "User Pages" do
       it { should have_link('change', href: 'http://gravatar.com/emails') }
     end
     
+    describe "as a wrong user" do
+      let(:other) { FactoryGirl.create(:user) }
+      
+      before do
+        visit edit_user_path(other)
+      end
+      
+      describe "page" do
+        it { should_not have_selector('h1', text: "Update your profile") }
+      end
+    end
+    
+    describe "as an admin user" do
+      let(:admin) { FactoryGirl.create(:admin) }
+      
+      before do
+        sign_in admin
+        visit edit_user_path(user)
+      end
+      
+      describe "page" do
+        it { should have_selector('h1', text: "Update your profile") }
+      end
+    end
+    
     describe "with invalid information" do
       before do
         fill_in "Password", with: "123"
@@ -149,6 +174,20 @@ describe "User Pages" do
           expect { click_link('delete') }.to change(User, :count).by(-1)
         end
         it { should_not have_link('delete', href: user_path(admin)) }
+      end
+    end
+    
+    describe "edit links" do
+      it { should_not have_link('edit') }
+      
+      describe "as an admin user" do
+        let(:admin) { FactoryGirl.create(:admin) }
+        before do
+          sign_in admin
+          visit users_path
+        end
+        
+        it { should have_link('edit', href: edit_user_path(User.first)) }
       end
     end
   end
