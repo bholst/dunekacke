@@ -18,6 +18,13 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
       
+      <% if current_user.admin? %>
+        <%= f.label :activated %>
+        <%= f.check_box :activated %><br/>
+      <% else %>
+        <%= f.hidden_field :activated %>
+      <% end %>
+      
       <%= f.submit "Save changes", class: "btn btn-lare btn-primary" %>
     <% end %>
     

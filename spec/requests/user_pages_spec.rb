@@ -61,6 +61,7 @@ describe "User Pages" do
     describe "page" do
       it { should have_selector('h1', text: "Update your profile") }
       it { should have_selector('title', text: "Edit user") }
+      it { should_not have_content('Activated') }
       it { should have_link('change', href: 'http://gravatar.com/emails') }
     end
     
@@ -86,6 +87,7 @@ describe "User Pages" do
       
       describe "page" do
         it { should have_selector('h1', text: "Update your profile") }
+        it { should have_content('Activated') }
       end
     end
     
