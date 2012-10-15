@@ -14,5 +14,10 @@ FactoryGirl.define do
       activated false
     end
   end
+  
+  factory :tune do
+    content "X:1\nM:3/4\nL:1/8\nK:D\nDDD"
+    user
+  end
 end
 

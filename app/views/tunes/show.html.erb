@@ -1,0 +1,4 @@
+<% title = title_of(@tune) %>
+<% provide(:title, title) %>
+<h1><%= title %></h1>
+<%= image_tag(tune_rendering_path(@tune), alt: title) %>

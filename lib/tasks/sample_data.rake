@@ -12,10 +12,11 @@ namespace :db do
       name  = Faker::Name.name
       email = "#{n+1}@example.com"
       password = "password"
-      User.create!(name: name,
-                   email: email,
-                   password: password,
-                   password_confirmation: password)
+      user = User.create!(name: name,
+                          email: email,
+                          password: password,
+                          password_confirmation: password)
+      user.tunes.create!(content: "X:1\nT:#{name}'s Tune\nM:3/4\nL:1/8\nK:D\nDDD")
     end
   end
 end
