@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Tune do
   let(:user) { FactoryGirl.create(:user) }
   before do
-    @tune = user.tunes.build(content: "X:1\nM:3/4\nL:1/8\nK:D\nDDD")
+    @tune = user.tunes.build(:content => "X:1\nM:3/4\nL:1/8\nK:D\nDDD")
   end
   
   subject { @tune }
@@ -23,7 +23,7 @@ describe Tune do
   describe "accessible attributes" do
     it "should not allow access to user_id" do
       expect do
-        Tune.new(user_id: user.id)
+        Tune.new(:user_id => user.id)
       end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end
   end

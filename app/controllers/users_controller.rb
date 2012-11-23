@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
-  before_filter :correct_user_or_admin,   only: [:edit, :update]
-  before_filter :admin_user,     only: :destroy
+  before_filter :signed_in_user, :only => [:index, :edit, :update, :destroy]
+  before_filter :correct_user_or_admin,   :only => [:edit, :update]
+  before_filter :admin_user,     :only => :destroy
   
   def new
   end
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate(:page => params[:page])
   end
   
   def create
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     def signed_in_user
       unless signed_in?
         store_location
-        redirect_to signin_url, notice: "Please sign in."
+        redirect_to signin_url, :notice => "Please sign in."
       end
     end
     
