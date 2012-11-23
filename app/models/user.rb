@@ -13,7 +13,7 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation, :activated
-  attr_accessor :password, :password_confirmation, :admin, :activated
+  attr_accessor :password, :password_confirmation
   
   has_many :tunes
   
