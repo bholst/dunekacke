@@ -16,7 +16,8 @@ describe "Tune Pages" do
       visit root_path
     end
     
-    it { should have_link('Tunes', :href => tunes_path) }
+    it { should have_link('List', :href => tunes_path) }
+    it { should have_link('New', :href => new_tune_path) }
   end
   
   describe "index" do
