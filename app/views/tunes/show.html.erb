@@ -1,4 +1,15 @@
 <% title = title_of(@tune) %>
 <% provide(:title, title) %>
 <h1><%= title %></h1>
-<%= image_tag(tune_rendering_path(@tune), :alt => title) %>
+<!-- <%= image_tag(tune_rendering_path(@tune), :alt => title) %> -->
+
+<div id="music"></div>
+<div id="midi"></div>
+<div class="abc" ><%=raw @tune.content.html_safe.gsub(/\n/, "<br/>") %></div>
+
+<script type="text/javascript">
+  var tune = "<%=raw content_as_string(@tune)  %>";
+  ABCJS.renderAbc('music', tune, {});
+  ABCJS.renderMidi('midi', tune, {});
+</script>
+<!--  -->

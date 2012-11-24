@@ -1,6 +1,19 @@
 module TunesHelper
   # Returns the Title of a given tune
   def title_of(tune)
-    /^T:(.+)$/.match(tune.content)[1]
+    match = /^T:(.+)$/.match(tune.content)
+    title = ""
+    
+    if match != nil
+        title = match[1]
+    end
+    
+    title
+  end
+  
+  def content_as_string(tune)
+      content = tune.content
+      content = content.gsub(/\n/, "\\n")
+      content = content.gsub(/"/, "\\\"")
   end
 end
