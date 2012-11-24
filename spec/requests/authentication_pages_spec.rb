@@ -84,6 +84,20 @@ describe "Authentication" do
         end
       end
       
+      describe "in the tunes controller" do
+        let(:tune) { FactoryGirl.create(:tune) }
+        
+        describe "visiting the tune page" do
+          before { visit tune_path(tune) }
+          it { should have_selector('title', :text => 'Sign in') }
+        end
+        
+        describe "visiting the tune index" do
+          before { visit tunes_path }
+          it { should have_selector('title', :text => 'Sign in') }
+        end
+      end
+      
       describe "when attempting to visit a protected page" do
         before do
           visit edit_user_path(user)
