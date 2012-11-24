@@ -14,8 +14,7 @@ class TunesController < ApplicationController
   end
   
   def create
-    @tune = current_user.tunes.new
-    @tune.content = params[:tune][:content]
+    @tune = current_user.tunes.build(:content => params[:tune][:content])
     if @tune.save
       flash[:success] = "Tune successfully added!"
       redirect_to @tune
