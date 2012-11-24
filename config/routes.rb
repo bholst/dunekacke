@@ -1,8 +1,6 @@
 Dunekacke::Application.routes.draw do
   resources :users
-  resources :tunes do
-    resource :rendering, :only => [:show]
-  end
+  resources :tunes
   resources :sessions, :only => [:new, :create, :destroy]
 
   # You can have the root of your site routed with "root"
