@@ -4,7 +4,7 @@
 
 <div id="music"></div>
 <div id="midi"></div>
-<div class="abc" ><%=raw @tune.content.html_safe.gsub(/\n/, "<br/>") %></div>
+<div class="abc" ><%=raw content_as_html(@tune) %></div>
 
 <script type="text/javascript">
   var tune = "<%=raw content_as_string(@tune)  %>";

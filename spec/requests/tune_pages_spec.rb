@@ -42,4 +42,35 @@ describe "Tune Pages" do
     it { should have_selector('title', :text => 'Foo') }
     it { should have_selector('h1',    :text => 'Foo') }
   end
+  
+  describe "add" do
+    before { visit new_tune_path }
+    
+    let(:submit) { "Save tune" }
+    
+    describe "with invalid information" do
+      it "should not create a tune" do
+        expect { click_button submit }.not_to change(Tune, :count)
+      end
+    end
+    
+    describe "with valid information" do
+      let(:abc) { "X:1\nT:Foo\nM:3/4\nL:1/4\nK:D\nDDD" }
+      before do
+        fill_in "Put your ABC here:",     :with => abc
+      end
+      
+      it "should create a tune" do
+        expect { click_button submit }.to change(Tune, :count).by(1)
+      end
+      
+      describe "after saving the tune" do
+        before do
+          click_button submit
+        end
+        
+        it { should have_selector('title', :text => 'Foo') }
+      end
+    end
+  end
 end

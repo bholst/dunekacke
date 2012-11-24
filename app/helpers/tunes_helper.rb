@@ -12,8 +12,13 @@ module TunesHelper
   end
   
   def content_as_string(tune)
-      content = tune.content
-      content = content.gsub(/\n|\r\n|\r/, "\\n")
-      content = content.gsub(/"/, "\\\"")
+    content = tune.content
+    content = content.gsub(/\n|\r\n|\r/, "\\n")
+    content = content.gsub(/"/, "\\\"")
+  end
+  
+  def content_as_html(tune)
+    content = tune.content
+    content = content.html_safe.gsub(/\n|\r\n|\r/, "<br/>") 
   end
 end

@@ -1,0 +1,18 @@
+<% provide(:title, 'New tune') %>
+
+<h1>New tune</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@tune) do |f| %>
+      <% @error_obj = @tune %>
+      <%= render 'shared/error_messages' %>
+      
+      <%= f.label :content, "Put your ABC here:" %>
+      <%= f.text_area :content %>
+      
+      <%= f.submit "Save tune", :class => "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+

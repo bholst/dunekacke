@@ -8,4 +8,19 @@ class TunesController < ApplicationController
   def show
     @tune = Tune.find(params[:id])
   end
+  
+  def new
+    @tune = @current_user.tunes.new 
+  end
+  
+  def create
+    @tune = current_user.tunes.new
+    @tune.content = params[:tune][:content]
+    if @tune.save
+      flash[:success] = "Tune successfully added!"
+      redirect_to @tune
+    else
+      render 'new'
+    end
+  end
 end
