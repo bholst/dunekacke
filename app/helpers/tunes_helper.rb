@@ -13,7 +13,7 @@ module TunesHelper
   
   def content_as_string(tune)
       content = tune.content
-      content = content.gsub(/\n/, "\\n")
+      content = content.gsub(/\n|\r\n|\r/, "\\n")
       content = content.gsub(/"/, "\\\"")
   end
 end
