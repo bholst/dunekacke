@@ -1,10 +1,14 @@
 <% title = title_of(@tune) %>
 <% provide(:title, title) %>
-<h1><%= title %></h1>
 
-<div id="music"></div>
-<div id="midi"></div>
-<div class="abc" ><%=raw content_as_html(@tune) %></div>
+
+<div class="row">
+  <div class="span10 offset1">
+    <div id="music"><h1><%= title %></h1></div>
+    <div id="midi"></div>
+    <div class="abc" ><%=raw content_as_html(@tune) %></div>
+  </div>
+</div>
 
 <script type="text/javascript">
   var tune = "<%=raw content_as_string(@tune)  %>";
