@@ -64,6 +64,17 @@ describe "Authentication" do
   end
   
   describe "authorization" do
+    describe "as unactivated user" do
+      let(:user) { FactoryGirl.create(:unactivated) }
+      before do
+        sign_in user
+      end
+      
+      before { put user_path(user) }
+      specify { response.should redirect_to(signin_path) }
+    end
+    
+    
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
       
