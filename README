@@ -2,7 +2,7 @@ dunekacke - DudelrUdels Neue Eigene Komplettsammlung Aller sChönen KompositionE
 
 As a dependency to build all the gems you need at least (RHEL package names):
 * gcc
-* gcc-g++
+* gcc-c++
 * libxslt-devel
 * libxml2-devel
 * postgresql-devel
@@ -12,4 +12,30 @@ As a dependency to build all the gems you need at least (RHEL package names):
 * rubygems
 
 You can install all these with:
-yum install gcc gcc-g++ libxslt-devel libxml2-devel postgresql-devel postgresql-server git ruby-devel rubygems
+# yum install gcc gcc-c++ libxslt-devel libxml2-devel postgresql-devel postgresql-server git ruby-devel rubygems
+Remember to check the yum output to check if all package names have been found.
+
+Then doing
+# gem install bundler
+# cd <directory-where-you-installed-the-files>
+# gem bundle install
+should do the trick.
+
+If you want to deploy the app, install the mod_passenger package:
+# yum install mod_passenger
+
+And make a symbolic link to where you want passenger to serve your app:
+ln -s <directory-where-you-installed-the-files>/public/ /var/www/html/dunekacke
+
+My /etc/httpd/conf.d/dunekacke.conf looks like this
+RackBaseURI /dunekacke
+<Directory /var/www/html/dunekacke>
+    Options -MultiViews
+</Directory>
+
+Don't forget to init and start postgresql:
+# service postgresql initdb
+# service postgresql start
+
+And restart httpd:
+# service httpd restart
