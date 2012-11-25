@@ -1,1 +1,14 @@
 dunekacke - DudelrUdels Neue Eigene Komplettsammlung Aller sChönen KompositionEn
+
+As a dependency to build all the gems you need at least (RHEL package names):
+* gcc
+* gcc-g++
+* libxslt-devel
+* libxml2-devel
+* postgresql-devel
+* postgresql-server
+* git
+* ruby-devel
+
+You can install all these with:
+yum install gcc gcc-g++ libxslt-devel libxml2-devel postgresql-devel postgresql-server git ruby-devel
