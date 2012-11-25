@@ -1,0 +1,31 @@
+<% provide(:title, 'Edit tune') %>
+
+<h1>Edit tune</h1>
+
+<div class="row">
+  <div class="span10 offset1">
+    <%= form_for(@tune) do |f| %>
+      <% @error_obj = @tune %>
+      <%= render 'shared/error_messages' %>
+      
+      <%= f.label :content, "Edit your ABC here:" %>
+      <%= f.text_area :content %>
+      
+      <%= f.submit "Save tune", :class => "btn btn-large btn-primary" %>
+    <% end %>
+    
+    <div id="midi"></div>
+    <div id="warnings"></div>
+    <div id="music"></div>
+    <div id="paper0"></div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  window.onload = function() {
+    abc_editor = new ABCJS.Editor("tune_content", { paper_id: "paper0", midi_id:"midi", warnings_id:"warnings" });
+  }
+</script>
+
+
