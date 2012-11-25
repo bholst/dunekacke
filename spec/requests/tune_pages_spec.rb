@@ -42,6 +42,21 @@ describe "Tune Pages" do
     
     it { should have_selector('title', :text => 'Foo') }
     it { should have_selector('h1',    :text => 'Foo') }
+    
+  
+    describe "edit links" do
+      it { should have_link('edit', :href => edit_tune_path(t1)) }
+      
+      describe "as another user" do
+        let(:user2) { FactoryGirl.create(:user) }
+        before do
+          sign_in user2
+          visit tune_path(t1)
+        end
+        
+        it { should_not have_link('edit') }
+      end
+    end
   end
   
   describe "add" do

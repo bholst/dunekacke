@@ -6,6 +6,9 @@
   <div class="span10 offset1">
     <div id="music"><h1><%= title %></h1></div>
     <div id="midi"></div>
+    <% if current_user?(@tune.user) %>
+      <%= link_to "edit", edit_tune_path(@tune) %>
+    <% end %>
     <div class="abc" ><%=raw content_as_html(@tune) %></div>
   </div>
 </div>
