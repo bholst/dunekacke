@@ -46,7 +46,7 @@ describe "User Pages" do
           click_button submit
         end
         
-        it { should have_link('Sign out') }
+        it { should_not have_link('Sign out') }
       end
     end
   end
