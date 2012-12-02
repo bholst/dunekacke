@@ -19,7 +19,7 @@ class TunesController < ApplicationController
   
   def update
     if @tune.update_attributes(params[:tune])
-      flash[:success] = "Profile updated"
+      flash[:success] = "Tune updated"
     
       redirect_to @tune
     else
