@@ -1,9 +1,11 @@
 module SessionsHelper
   
   def sign_in(user)
-    if user.activated then
+    if user.activated? then
       cookies.permanent[:remember_token] = user.remember_token
       self.current_user = user
+    else
+      self.current_user = nil
     end
   end
   
@@ -20,7 +22,7 @@ module SessionsHelper
   end
   
   def signed_in?
-    !current_user.nil?
+    !current_user.nil? and current_user.activated
   end
   
   def sign_out

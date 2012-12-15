@@ -70,8 +70,15 @@ describe "Authentication" do
         sign_in user
       end
       
-      before { put user_path(user) }
-      specify { response.should redirect_to(signin_path) }
+      describe "putting user" do
+        before { put user_path(user) }
+        specify { response.should redirect_to(signin_path) }
+      end
+      
+      describe "visiting user page" do
+        before { visit user_path(user) }
+        specify { should have_selector('h1', :text => 'Sign in') }
+      end
     end
     
     

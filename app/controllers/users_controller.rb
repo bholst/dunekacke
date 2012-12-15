@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, :only => [:index, :edit, :update, :destroy]
+  before_filter :signed_in_user, :only => [:index, :show, :edit, :destroy, :update]
   before_filter :correct_user_or_admin,   :only => [:edit, :update]
   before_filter :admin_user,     :only => :destroy
-  
-  def new
-  end
   
   def show
     @user = User.find(params[:id])
@@ -21,9 +18,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      sign_in @user
-      flash[:success] = "Welcome to Dunekacke!"
-      redirect_to @user
+      flash[:success] = "Welcome to Dunekacke, you will be activated soon!"
+      redirect_to root_path
     else
       render 'new'
     end
