@@ -2,6 +2,9 @@ class Tune < ActiveRecord::Base
   attr_accessible :content
   belongs_to :user
   
+  has_many :tune_ratings
+  has_many :raters, :through => :ratings, :source => :users
+  
   validates :user_id, :presence => true
   validates :content, :presence => true
   

@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   attr_accessor :password, :password_confirmation
   
   has_many :tunes
+  has_many :tune_ratings
+  has_many :rated_tunes, :through => :tune_ratings, :source => :tunes
   
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
