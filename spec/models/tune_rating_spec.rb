@@ -85,7 +85,7 @@ describe TuneRating do
         end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
       end
       
-      it "sholud not allow access to tune_id" do
+      it "should not allow access to tune_id" do
         expect do
           TuneRating.new(:tune_id => tune.id)
         end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
